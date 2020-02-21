@@ -1,0 +1,29 @@
+generating maps
+_______________
+
+method 1: layers of wfc
+
+________________
+|		|		
+|		|	  --------------
+|	habit	|---------|	services|
+|	ation	|	  |_____	|
+|		|	  	|	|
+|_______________|		|	|
+	|			|_______|
+	|	    _________	    |
+	|__________|	     |      |
+		   |	 grav|______|
+		   |_________|
+
+etc etc
+
+have predetermined nodes, rule matrix to determine what can connect to what, and generate a rough layout of the whole map.
+then use some more fine-grain generation (wfc?) to generate the actual internal layouts. 
+
+basically, many passes of wfc, each adding a layer of detail.
+
+layers:
+1. entire station, with substation positions and bridges connecting them
+2. rough intra-substation generation, designating rough sectors of various predetermined types. for instance, habitation could have housing sectors, entertainment, idk
+3. per-sector generation, actually making rooms of various types

@@ -1,0 +1,105 @@
+ALIEN RIPOFF SIM 2020
+
+basic gameplay loop:
+
+	basic roguelike framework- start game, gen station, few items, explore, use items to get more items, etc
+
+	ending- ??? 
+
+	less emphasis on building a la minecraft, more exploring and looting. draw from cdaa
+
+graphics:
+	
+	side-view, 2d, like super metroid?
+
+misc ideas:
+
+	cloning vats serve as save points, use bio backups as "lives", once you run out gg
+		-backups probably rare?
+
+	sanity- tunnel vision as you go more crazy? audio-visual hallucinations? restore sanity as you accomplish tasks, a la amnesia dd
+
+actual implementation details:
+
+	tile-based grid system-
+		dimensions?
+		what data should each space have?
+			-position
+			-tile data
+				-type
+				-"health"
+			-entities
+				-inventory
+				-stats
+				-location
+
+	
+	rough file heiarchy [sic]
+							
+									game
+									|
+								       	------------------------------------------------
+									|		|		|		|
+									renderer	input manager	initializer	game logic loop
+													|
+													json parser
+
+	rough program flow
+
+									game
+									|
+									initialize general data from json (tile data, etc)
+									|
+									main menu
+								------->|-----------------------|
+								|	play			settings
+								|	|			|todo
+								|	----------------
+								|	|		|
+								|	new game	load game
+								|	|		|
+								|	create new map	get file data from json, recreate old map data
+								|	data		|
+								|	|		|
+								|	----------------
+								|	|	
+								|	//actual gameplay loop
+						-------------------------------|
+						|		|	poll for player input
+						|		|	|
+						|		|	--------------------------------------------------------------------------------
+						|		|	|		|		|		|		|		|
+						|		|	pause btn	movement btns	mouse aiming	inventory	item hotkeys	mouse click
+						|		|	|		|		|		|		|		|
+						|	//unload|	open pause menu	calculate new 	find cursor loc	flag inv draw	if inv select?	if current item used mouse?
+						|	//assets|	|		pos		relative to in	|		|--------|		  |--------|
+						|	//etc	|	--------	|		game stuff	flag inv select yes	no		  yes	   no
+						|		|	|	|	check if new pos|		|		|	 |  		  |	   |
+						|		--------exit	return	is valid	mark tile/entfor|		use inv	 swap selected 	  do action select 
+						|				|	|-------|	highlighting	|		keys to	 item to hotkeyd  for item  highlighted
+						|				|	yes	no	|		|		nav inv  item		  |	    tile/entity
+						|				|	|	|	|		|		|	  |		  |		|
+						|				|	update	|	|		|		| 	  |		  |		|
+						|				|	pos	|	|		|		|	  |		  |		|
+						|				|	|	|	|		|		|	  |		  |		|
+						|				------------------------------------------------------------------------------------------------
+						|				|
+						|				render scene
+						|				|
+						|				draw background (space, stars, planet? idk, for debug just blackish blue works)
+						|				|
+						|				draw visible tiles
+						|				|
+						|				draw visible ents
+						|				|
+						|				draw ui
+						|				|
+						|				update game logic
+						|				|
+						|				--------------------------------
+						|				|		|		|
+						|				o2, fire, etc	entities	misc
+						|				|		|		|
+						|				--------------------------------
+						|						|
+						------------------------------------------------
