@@ -32,18 +32,21 @@ SpriteData* initSpriteData(){
     data[0].animations[1].frames = 10;
     Rectangle r2 = {16, 0, 48, 48};
     data[0].animations[1].initial = r2;
-    data[0].animations[1].speed = 2;
+    data[0].animations[1].speed = 5;
     
     return data;
 }
 
 int drawEntity(Texture2D sheet, SpriteData* data, Entity* entity){
-    Rectangle tempRect = {data[entity->typeId].animations[entity->action].initial.x + (entity->animationFrame / (FRAMERATE / data[entity->typeId].animations[entity->action].frames)) * abs(data[entity->typeId].animations[entity->action].initial.width), 
+    Rectangle tempRect = {data[entity->typeId].animations[entity->action].initial.x + entity->animationFrame * abs(data[entity->typeId].animations[entity->action].initial.width), 
         data[entity->typeId].animations[entity->action].initial.y, 
-        data[entity->typeId].animations[entity->action].initial.width, 
+        data[entity->typeId].animations[entity->action].initial.width * entity->direction, 
         data[entity->typeId].animations[entity->action].initial.height};
     DrawTextureRec(sheet, tempRect, entity->position, WHITE);
-    entity->animationFrame = (entity->animationFrame+data[entity->typeId].animations[entity->action].speed) % FRAMERATE;
+    if (entity->interFrame++ == data[entity->typeId].animations[entity->action].speed){
+        entity->interFrame = 0;
+        entity->animationFrame = (entity->animationFrame + 1) % data[entity->typeId].animations[entity->action].frames;
+    }
     return 1;
 }
 

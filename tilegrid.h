@@ -5,7 +5,7 @@
 #include "utils.h"
 
 typedef struct Tile{
-    IntVector2 IntVector2;
+    IntVector2 position;
     int type;
 }Tile;
 
@@ -21,6 +21,13 @@ typedef struct Map{
 
 Tile* getTileAt(TileGrid* grid, IntVector2 pos){
     return &grid->tiles[pos.x + pos.y * GRID_SIZE];
+}
+
+TileGrid* initTileGrid(IntVector2 size){
+    TileGrid* grid = (TileGrid*) malloc(sizeof(TileGrid));
+    grid->size = size;
+    grid->tiles = (Tile*) malloc(sizeof(Tile) * size.x * size.y);
+    return grid;
 }
 
 #endif

@@ -21,7 +21,10 @@ int main(void)
     Rectangle samusInitial = {16, 96, 48, 48};
     Vector2 samusPos = {200.0, 200.0};
     Vector2 playerPos = {100.0, 200.0};
-    Entity player = {0, 0, 0, 1, 0, playerPos};
+    Entity player = {0, 1, 0, 0, {16.0f,32.0f}, 1, 0, playerPos};
+    
+    IntVector2 testGridSize = {32,16};
+    TileGrid tileGrid = initTileGrid(testGridSize);
     
     SpriteData* SPRITE_DATA = initSpriteData();
 
@@ -35,23 +38,27 @@ int main(void)
 
     SetTargetFPS(FRAMERATE);         
     //--------------------------------------------------------------------------------------
-
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // Draw
         //----------------------------------------------------------------------------------
         if(IsKeyDown(KEY_A)){
-            cam.offset.x -= 1.0f;
+            player.action = RUN;
+            player.direction = 1;
         }
         if(IsKeyDown(KEY_D)){
-            cam.offset.x += 1.0f;
+            player.action = RUN;
+            player.direction = -1;
         }
         if(IsKeyDown(KEY_W)){
-            cam.offset.y -= 1.0f;
+            //cam.offset.y -= 1.0f;
         }
         if(IsKeyDown(KEY_S)){
-            cam.offset.y += 1.0f;
+            //cam.offset.y += 1.0f;
+        }
+        if(IsKeyDown(KEY_SPACE)){
+            ;
         }
         
         BeginDrawing();

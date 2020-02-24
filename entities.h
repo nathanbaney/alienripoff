@@ -13,8 +13,10 @@ typedef enum Action{
 
 typedef struct Entity{
     int typeId;
-    int direction; //0 is left, 1 is right
+    int direction; //-1 is left, 1 is right
     int animationFrame;
+    int interFrame; //frames per frame, i guess. counts from 0 to n, then increments animation frame at n
+    Vector2 size;
     Action action; 
     Behavior behavior;
     Vector2 position;
